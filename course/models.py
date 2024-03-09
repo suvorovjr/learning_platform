@@ -7,5 +7,9 @@ class Course(models.Model):
     imagine = models.ImageField(upload_to='courses/', verbose_name='Изображение', **NULLABLE)
     description = models.TextField(verbose_name='Описание')
 
+    def __str__(self):
+        return f'{self.title}'
 
-
+    class Meta:
+        verbose_name = 'Курс'
+        verbose_name_plural = 'Курсы'
