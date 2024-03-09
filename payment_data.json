@@ -1,0 +1,56 @@
+[
+  {
+    "model": "users.payment",
+    "fields": {
+      "pay_data": "2024-03-01",
+      "paid_course": 2,
+      "amount": 10000,
+      "payment_method": "by_card"
+    }
+  },
+  {
+    "model": "users.payment",
+    "fields": {
+      "pay_data": "2024-03-02",
+      "paid_course": 1,
+      "amount": 15000,
+      "payment_method": "in_cash"
+    }
+  },
+  {
+    "model": "users.payment",
+    "fields": {
+      "pay_data": "2024-03-03",
+      "paid_lesson": 1,
+      "amount": 1200,
+      "payment_method": "transfer"
+    }
+  },
+  {
+    "model": "users.payment",
+    "fields": {
+      "pay_data": "2024-03-01",
+      "paid_course": 1,
+      "amount": 15000,
+      "payment_method": "transfer"
+    }
+  },
+  {
+    "model": "users.payment",
+    "fields": {
+      "pay_data": "2024-03-02",
+      "paid_course": 2,
+      "amount": 10000,
+      "payment_method": "transfer"
+    }
+  },
+  {
+    "model": "users.payment",
+    "fields": {
+      "pay_data": "2024-03-03",
+      "paid_lesson": 1,
+      "amount": 1200,
+      "payment_method": "by_card"
+    }
+  }
+]

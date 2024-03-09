@@ -21,8 +21,8 @@ class Payment(models.Model):
         ('in_cash', 'Наличными'),
         ('transfer', 'Перевод'),
     )
-    user = models.ForeignKey(User, models.CASCADE, verbose_name='Пользователь', related_name='payment')
-    pay_data = models.DateTimeField(auto_now_add=True, verbose_name='Дата и врмя оплаты')
+    user = models.ForeignKey(User, models.CASCADE, verbose_name='Пользователь', related_name='payment', **NULLABLE)
+    pay_data = models.DateField(auto_now_add=True, verbose_name='Дата оплаты')
     paid_course = models.ForeignKey(Course, models.CASCADE, verbose_name='Оплаченный курс', related_name='payment',
                                     **NULLABLE)
     paid_lesson = models.ForeignKey(Lesson, models.CASCADE, verbose_name='Оплаченный курс', related_name='payment',
