@@ -1,4 +1,5 @@
 from django.db import models
+from course.models import Course
 from users.models import NULLABLE
 
 
@@ -7,6 +8,7 @@ class Lesson(models.Model):
     imagine = models.ImageField(upload_to='courses/', verbose_name='Изображение', **NULLABLE)
     description = models.TextField(verbose_name='Описание')
     video_link = models.URLField(verbose_name='Ссылка на видео', **NULLABLE)
+    course = models.ForeignKey(Course, models.CASCADE, related_name='lesson', **NULLABLE)
 
     def __str__(self):
         return f'{self.title}'
