@@ -11,6 +11,9 @@ class LessonListAPIView(generics.ListAPIView):
     serializer_class = LessonSerializers
     queryset = Lesson.objects.all()
 
+    def get(self, request, *args, **kwargs):
+        pass
+
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = LessonSerializers

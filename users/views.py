@@ -1,6 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 from users.serializers import PaymentSerializer, UserSerializer
 from users.models import Payment, User
 
@@ -12,6 +13,7 @@ class UserCreateAPIView(generics.CreateAPIView):
 class UserRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    pagination_class = [IsAuthenticated]
 
 
 class UserUpdateAPIView(generics.UpdateAPIView):
