@@ -11,17 +11,17 @@ class UserCreateAPIView(generics.CreateAPIView):
 
 class UserRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
-    queryset = Payment.objects.all()
+    queryset = User.objects.all()
 
 
 class UserUpdateAPIView(generics.UpdateAPIView):
     serializer_class = UserSerializer
-    queryset = Payment.objects.all()
+    queryset = User.objects.all()
 
 
 class UserDestroyAPIView(generics.DestroyAPIView):
     serializer_class = UserSerializer
-    queryset = Payment.objects.all()
+    queryset = User.objects.all()
 
 
 class PaymentListAPIView(generics.ListAPIView):
