@@ -3,9 +3,16 @@ from users.models import Payment, User
 
 
 class UserSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        user = User(email=validated_data['email'])
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ["email", "password"]
+        extra_kwargs = {"password": {"write_only": True}}
 
 
 class PaymentSerializer(serializers.ModelSerializer):
