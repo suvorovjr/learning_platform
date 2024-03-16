@@ -19,11 +19,13 @@ class UserRetrieveAPIView(generics.RetrieveAPIView):
 class UserUpdateAPIView(generics.UpdateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    pagination_class = [IsAuthenticated]
 
 
 class UserDestroyAPIView(generics.DestroyAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    pagination_class = [IsAuthenticated]
 
 
 class PaymentListAPIView(generics.ListAPIView):
