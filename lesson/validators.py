@@ -7,5 +7,6 @@ class LinkValidator:
 
     def __call__(self, value):
         tmp_val = dict(value).get(self.field)
-        if 'youtube.com' not in tmp_val:
-            raise ValidationError('The link is not valid')
+        if tmp_val:
+            if 'youtube.com' not in tmp_val:
+                raise ValidationError('The link is not valid')
