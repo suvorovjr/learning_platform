@@ -18,8 +18,8 @@ class CourseViewSet(viewsets.ModelViewSet):
             permission_classes = [IsAuthenticated]
         elif self.action == 'retrieve':
             permission_classes = [IsAuthorOrModerator]
-        elif self.action == 'update':
-            permission_classes = [IsAuthorOrModerator]
+        elif self.action in ['update', 'partial_update']:
+            permission_classes = [IsAuthor]
         elif self.action == 'destroy':
             permission_classes = [IsAuthor]
         return [permission() for permission in permission_classes]
