@@ -30,10 +30,7 @@ class LessonTestCase(APITestCase):
         )
 
     def test_create_lesson(self):
-        """
-        Тест создания урока
-        :return: None
-        """
+        """Тест создания урока"""
 
         data = {
             'title': 'test_lesson',
@@ -60,10 +57,7 @@ class LessonTestCase(APITestCase):
         )
 
     def test_list_lesson(self):
-        """
-        Тест вывода списка уроков
-        :return:
-        """
+        """Тест вывода списка уроков"""
 
         response = self.client.get(
             reverse('lesson:list')
@@ -95,10 +89,7 @@ class LessonTestCase(APITestCase):
         )
 
     def test_view_lesson(self):
-        """
-        Тест отображения одного урока
-        :return:
-        """
+        """Тест отображения одного урока"""
 
         response = self.client.get(
             reverse('lesson:view', args=[str(self.lesson.id)])
@@ -126,10 +117,7 @@ class LessonTestCase(APITestCase):
         )
 
     def test_update_lesson(self):
-        """
-
-        :return:
-        """
+        """Тест редактирования урока"""
 
         data = {
             'title': 'test_lesson_2',
@@ -161,10 +149,7 @@ class LessonTestCase(APITestCase):
         )
 
     def tet_delete_lesson(self):
-        """
-
-        :return:
-        """
+        """Тест удаления урока"""
 
         response = self.client.delete(
             reverse('lesson:update', args=[str(self.lesson.id)])
