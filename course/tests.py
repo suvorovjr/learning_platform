@@ -1,7 +1,6 @@
 from rest_framework.test import APITestCase
 from rest_framework.test import APIClient
 from rest_framework import status
-from django.urls import reverse
 from users.models import User
 from course.models import Course
 
@@ -21,7 +20,7 @@ class CourseTestCase(APITestCase):
         )
 
     def test_course_create(self):
-        """"""
+        """Тест создания курса"""
         data = {
             'title': 'test_course_2',
             'description': 'test_description_2',
@@ -53,7 +52,7 @@ class CourseTestCase(APITestCase):
         )
 
     def test_list_course(self):
-        """"""
+        """Тест отображения списка курсов"""
 
         response = self.client.get(
             '/course/'
@@ -81,7 +80,7 @@ class CourseTestCase(APITestCase):
         )
 
     def test_retrieve_course(self):
-        """"""
+        """Тест отображения одного курса"""
 
         response = self.client.get(
             f'/course/{self.course.id}/'
@@ -107,7 +106,7 @@ class CourseTestCase(APITestCase):
         )
 
     def test_update_course(self):
-        """"""
+        """Тест редактирования курса"""
 
         data = {
             'title': 'test_course_1',
@@ -138,7 +137,7 @@ class CourseTestCase(APITestCase):
         )
 
     def test_destroy_course(self):
-        """"""
+        """Тест удаления курса"""
 
         response = self.client.delete(
             f'/course/{self.course.id}/'
