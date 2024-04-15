@@ -3,7 +3,7 @@ from lesson.models import Lesson
 from lesson.serializers import LessonSerializer
 from lesson.permissions import IsAuthorOrModerator, IsAuthor, IsModerator
 from rest_framework.permissions import IsAuthenticated
-from course.paginators import CoursePaginator
+from lesson.paginators import LessonPaginator
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
@@ -20,7 +20,7 @@ class LessonListAPIView(generics.ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsAuthenticated]
-    pagination_class = CoursePaginator
+    pagination_class = LessonPaginator
 
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
