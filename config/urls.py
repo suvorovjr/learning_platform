@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('course.urls', namespace='course')),
     path('lesson/', include('lesson.urls', namespace='lesson')),
     path('users/', include('users.urls', namespace='users')),
+    path('subscription/', include('subscription.urls', namespace='subscription')),
 ]
