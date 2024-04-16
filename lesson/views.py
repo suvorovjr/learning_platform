@@ -18,7 +18,7 @@ class LessonCreateAPIView(generics.CreateAPIView):
 
 class LessonListAPIView(generics.ListAPIView):
     serializer_class = LessonSerializer
-    queryset = Lesson.objects.all()
+    queryset = Lesson.objects.all().order_by('id')
     permission_classes = [IsAuthenticated]
     pagination_class = LessonPaginator
 

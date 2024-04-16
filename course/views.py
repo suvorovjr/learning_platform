@@ -8,7 +8,7 @@ from course.paginators import CoursePaginator
 
 class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
-    queryset = Course.objects.all()
+    queryset = Course.objects.all().order_by('id')
     pagination_class = CoursePaginator
 
     def get_permissions(self):
