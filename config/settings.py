@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'course',
     'lesson',
     'users',
-    'subscription'
+    'subscription',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
