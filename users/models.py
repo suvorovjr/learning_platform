@@ -23,15 +23,12 @@ class Payment(models.Model):
     )
     user = models.ForeignKey(User, models.CASCADE, verbose_name='Пользователь', related_name='payment', **NULLABLE)
     pay_data = models.DateField(auto_now_add=True, verbose_name='Дата оплаты')
-    paid_course = models.ForeignKey(Course, models.CASCADE, verbose_name='Оплаченный курс', related_name='payment',
-                                    **NULLABLE)
-    paid_lesson = models.ForeignKey(Lesson, models.CASCADE, verbose_name='Оплаченный курс', related_name='payment',
-                                    **NULLABLE)
-    amount = models.PositiveIntegerField(verbose_name='Сумма оплаты')
+    paid_course = models.ForeignKey(Course, models.CASCADE, verbose_name='Оплаченный курс', related_name='payment')
     payment_method = models.CharField(max_length=20, choices=PAYMENT_METHODS, verbose_name='Способ оплаты')
+    status_of_paid = models.BooleanField(default=False, verbose_name='Статус платежа')
 
     def __str__(self):
-        return f'{self.user} - {self.paid_course if self.paid_course else self.paid_lesson}'
+        return f'{self.user} - {self.paid_course}'
 
     class Meta:
         verbose_name = 'Платеж'
