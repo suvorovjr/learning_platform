@@ -10,7 +10,7 @@ class Lesson(models.Model):
     imagine = models.ImageField(upload_to='courses/', verbose_name='Изображение', **NULLABLE)
     description = models.TextField(verbose_name='Описание')
     video_link = models.URLField(verbose_name='Ссылка на видео', **NULLABLE)
-    course = models.ForeignKey(Course, models.CASCADE, related_name='lesson', **NULLABLE)
+    course = models.ForeignKey(Course, models.CASCADE, related_name='lesson')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE, verbose_name='Автор урока', **NULLABLE)
 
     def __str__(self):
