@@ -17,3 +17,10 @@ class IsModerator(BasePermission):
     def has_permission(self, request, view):
         if request.user.groups.filter(name='manager').exists():
             return True
+
+
+class IsPaid(BasePermission):
+    def has_permission(self, request, view):
+        if request.user.groups.filter(name='manager').exists():
+            return True
+        return request.user == view.get_object().author
