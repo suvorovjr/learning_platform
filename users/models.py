@@ -22,6 +22,7 @@ class Payment(models.Model):
         ('transfer', 'Перевод'),
     )
     user = models.ForeignKey(User, models.CASCADE, verbose_name='Пользователь', related_name='payment', **NULLABLE)
+    stripe_payment_id = models.CharField(max_length=255, verbose_name="Stripe ID", **NULLABLE)
     pay_data = models.DateField(auto_now_add=True, verbose_name='Дата оплаты')
     paid_course = models.ForeignKey(Course, models.CASCADE, verbose_name='Оплаченный курс', related_name='payment')
     payment_method = models.CharField(max_length=20, choices=PAYMENT_METHODS, verbose_name='Способ оплаты')

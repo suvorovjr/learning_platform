@@ -20,6 +20,7 @@ class StripeAPIClient:
         self.product_name = product_name
         self.currency = currency
         self.headers = {'Authorization': f'Bearer {self.api_key}'}
+        self.stripe_payment_id = None
 
     def create_product(self):
         """
@@ -74,7 +75,15 @@ class StripeAPIClient:
             data=session_data
         ).json()
         payment_url = session_response.get('url')
+        self.stripe_payment_id = session_response.get('id')
         return payment_url
+
+    def get_stripe_payment_id(self):
+        """
+        Функция для получения stripe id
+        :return: stripe id
+        """
+        return self.stripe_payment_id
 
     @staticmethod
     def check_payment_status(payment_id):

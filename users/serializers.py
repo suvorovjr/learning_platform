@@ -29,4 +29,7 @@ class PaymentSerializer(serializers.ModelSerializer):
         product_name = obj.paid_course.title
         api_client = StripeAPIClient(amount=amount, product_name=product_name)
         payment_url = api_client.create_session()
+        stripe_payment_id = api_client.get_stripe_payment_id()
+        obj.stripe_payment_id = stripe_payment_id
+        obj.save()
         return payment_url
