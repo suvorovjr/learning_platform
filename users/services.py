@@ -3,8 +3,18 @@ from django.conf import settings
 
 
 class StripeAPIClient:
+    """
+    Клаас для работы с сервисом Stripe
+    """
 
     def __init__(self, amount, product_name, currency='rub'):
+        """
+        Инициализатор класса для работы с сервисом Stripe
+        :param amount: Стоимость курса
+        :param product_name: Название курса
+        :param currency: Валюта. По умолчанию это рубли.
+        """
+
         self.api_key = settings.STRIPE_API_KEY
         self.amount = amount
         self.product_name = product_name
@@ -12,6 +22,11 @@ class StripeAPIClient:
         self.headers = {'Authorization': f'Bearer {self.api_key}'}
 
     def create_product(self):
+        """
+        Метод для создания продукта на сервису Stripe
+        :return: ID продукта
+        """
+
         product_data = {'name': self.product_name}
         product_response = requests.post(
             'https://api.stripe.com/v1/products',
@@ -22,6 +37,11 @@ class StripeAPIClient:
         return product_id
 
     def create_price(self):
+        """
+        Метод для создание цены на продукт
+        :return: ID цены
+        """
+
         price_data = {
             'unit_amount': self.amount * 100,
             'currency': self.currency,
@@ -36,6 +56,11 @@ class StripeAPIClient:
         return price_id
 
     def create_session(self):
+        """
+        Метод для создания платежной сессии
+        :return: Ссылка на платежную сессию
+        """
+
         session_data = {
             'payment_method_types[]': 'card',
             'line_items[0][price]': self.create_price(),
@@ -53,6 +78,12 @@ class StripeAPIClient:
 
     @staticmethod
     def check_payment_status(payment_id):
+        """
+        Статический метод для проверки статуса платежа
+        :param payment_id: ID платежной сессии
+        :return: Статус платежа
+        """
+
         url = f'https://api.stripe.com/v1/checkout/sessions/{payment_id}'
         headers = {'Authorization': f'Bearer {settings.STRIPE_API_KEY}'}
         check_response = requests.get(
