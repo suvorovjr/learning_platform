@@ -162,9 +162,15 @@ CELERY_TIMEZONE = "Europe/Moscow"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 CELERY_BEAT_SCHEDULE = {
-    'task-name': {
-        'task': 'users.tasks.my_task',
+    'deactivate_users_task': {
+        'task': 'users.tasks.deactivate_users',
         'schedule': timedelta(days=1),
     },
 }
