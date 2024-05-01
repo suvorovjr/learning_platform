@@ -1,11 +1,14 @@
 from rest_framework import generics
+from rest_framework.response import Response
+from course.tasks import notification_of_changes
 from lesson.models import Lesson
 from lesson.serializers import LessonSerializer
 from lesson.permissions import IsAuthorOrModerator, IsAuthor, IsModerator, IsPaid
 from rest_framework.permissions import IsAuthenticated
 from lesson.paginators import LessonPaginator
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import PermissionDenied
 from course.models import Course
+from subscription.models import Subscription
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
@@ -40,6 +43,16 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsAuthorOrModerator]
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        subscribers = Subscription.objects.filter(course=instance.course.pk)
+        subscribers_email = [subscriber.user.email for subscriber in subscribers]
+        notification_of_changes.delay(instance.title, subscribers_email)
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
 
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
