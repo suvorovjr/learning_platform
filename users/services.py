@@ -83,6 +83,7 @@ class StripeAPIClient:
         Функция для получения stripe id
         :return: stripe id
         """
+
         return self.stripe_payment_id
 
     @staticmethod
@@ -100,4 +101,4 @@ class StripeAPIClient:
             headers=headers
         ).json()
         payment_status = check_response.get('payment_status')
-        return payment_status == 'paid'
+        return payment_status

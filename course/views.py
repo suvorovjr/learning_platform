@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from course.models import Course
 from rest_framework.permissions import IsAuthenticated
 from lesson.permissions import IsAuthorOrModerator, IsAuthor, IsModerator
+from course.permissions import IsPaidCourse
 from course.serializers import CourseSerializer
 from course.paginators import CoursePaginator
 
@@ -17,7 +18,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         elif self.action == 'list':
             permission_classes = [IsAuthenticated]
         elif self.action == 'retrieve':
-            permission_classes = [IsAuthorOrModerator]
+            permission_classes = [IsAuthorOrModerator, IsPaidCourse]
         elif self.action in ['update', 'partial_update']:
             permission_classes = [IsAuthor]
         elif self.action == 'destroy':
